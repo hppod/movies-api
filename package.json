@@ -1,0 +1,19 @@
+{
+  "name": "movies-api",
+  "version": "1.0.0",
+  "description": "Movies API para o treinamento do GPES",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hppod/movies-api.git"
+  },
+  "author": "hppod",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hppod/movies-api/issues"
+  },
+  "homepage": "https://github.com/hppod/movies-api#readme"
+}
