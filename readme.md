@@ -6,3 +6,9 @@ Terceiro passo: commitar
 
 npm install body-parser cors dotenv express mongoose
 npm install --save-dev nodemon
+
+CRUD
+Create
+Read
+Update
+Delete
