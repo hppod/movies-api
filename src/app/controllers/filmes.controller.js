@@ -14,5 +14,15 @@ class Filme {
         })
     }
 
+    visualizarFilmes(req, res) {
+        filmeschema.find({}, (err, data) => {
+            if (err) {
+                res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
+            } else {
+                res.status(200).send({ message: "Todos os filmes foram recuperados com sucesso", filmes: data })
+            }
+        })
+    }
+
 }
 module.exports = new Filme()
