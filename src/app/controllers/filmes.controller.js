@@ -52,5 +52,17 @@ class Filme {
         })
     }
 
+    atualizarUmFilme(req, res) {
+        const nome = req.params.nome
+
+        filmeschema.updateOne({ nome: nome }, { $set: req.body }, (err, data) => {
+            if (err) {
+                res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
+            } else {
+                res.status(200).send({ message: `Filme ${nome} foi atualizado com sucesso` })
+            }
+        })
+    }
+
 }
 module.exports = new Filme()
