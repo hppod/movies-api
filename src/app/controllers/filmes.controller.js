@@ -73,5 +73,17 @@ class Filme {
         })
     }
 
+    apagarUmFilme(req, res) {
+        const nomeDoFilmeParaSerApagado = req.params.nome
+
+        filmeschema.deleteOne({ nome: nomeDoFilmeParaSerApagado }, (err) => {
+            if (err) {
+                res.status(500).send({ message: "Houve um erro ao apagar um filme", error: err })
+            } else {
+                res.status(200).send({ message: `O filme ${nomeDoFilmeParaSerApagado} foi apagado com sucesso` })
+            }
+        })
+    }
+
 }
 module.exports = new Filme()
