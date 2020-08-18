@@ -30,7 +30,9 @@ for (let i = 0; i < 10; i++) {
     }
 }
 
+let fruta = {
+    vitamina: "A",
+    fruta: "Laranja"
+}
 
-let frutas = ['Banana', 'Maçã', 'Laranja', 'Abacaxi']
-
-console.log(frutas.length)
+console.log(fruta['vitamina'])
