@@ -14,3 +14,4 @@ if (1 > 2) {
 }
 
 console.log('Adicionando um conflito em develop')
+console.log('Adicionando um conflito')
