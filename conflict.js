@@ -12,3 +12,5 @@ if (1 > 2) {
 } else {
     console.log('É menor')
 }
+
+console.log('Adicionando um conflito')
