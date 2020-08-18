@@ -16,6 +16,12 @@ if (1 > 2) {
 console.log('Adicionando um conflito em develop')
 console.log('Adicionando um conflito')
 
+let cidades = ['São Paulo', 'Rio de Janeiro', 'Curitiba', 'Porto Alegre', 'Salvador']
+
+cidades.forEach(cidade => {
+    console.log(`A cidade atual é ${cidade}`)
+})
+
 for (let i = 0; i < 10; i++) {
     if (i < 5) {
         console.log(`${i} é menor do que 5`)
