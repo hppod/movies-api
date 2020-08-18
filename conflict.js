@@ -15,3 +15,9 @@ if (1 > 2) {
 
 console.log('Adicionando um conflito em develop')
 console.log('Adicionando um conflito')
+
+let cidades = ['São Paulo', 'Rio de Janeiro', 'Curitiba', 'Porto Alegre', 'Salvador']
+
+cidades.forEach(cidade => {
+    console.log(`A cidade atual é ${cidade}`)
+})
