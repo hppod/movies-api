@@ -15,3 +15,11 @@ if (1 > 2) {
 
 console.log('Adicionando um conflito em develop')
 console.log('Adicionando um conflito')
+
+for (let i = 0; i < 10; i++) {
+    if (i < 5) {
+        console.log(`${i} é menor do que 5`)
+    } else {
+        console.log(`${i} é maior do que 5`)
+    }
+}
