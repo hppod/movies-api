@@ -29,3 +29,10 @@ for (let i = 0; i < 10; i++) {
         console.log(`${i} é maior do que 5`)
     }
 }
+
+let fruta = {
+    vitamina: "A",
+    fruta: "Laranja"
+}
+
+console.log(fruta['vitamina'])
