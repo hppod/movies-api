@@ -13,4 +13,5 @@ if (1 > 2) {
     console.log('É menor')
 }
 
+console.log('Adicionando um conflito em develop')
 console.log('Adicionando um conflito')
