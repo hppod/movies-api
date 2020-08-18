@@ -1,5 +1,6 @@
 const filmeschema = require('./../models/filmes.model')
 
+/**Função para definir quais campos devem ser buscados ao realizar um find no banco de dados */
 function definirCamposDeBusca(campos) {
     if (campos == 'nome18') {
         return { nome: 1, maior18: 1 }
@@ -12,6 +13,7 @@ function definirCamposDeBusca(campos) {
 
 class Filme {
 
+    /**Método para inserir um dado no banco de dados */
     criarFilme(req, res) {
         const body = req.body
 
@@ -24,6 +26,7 @@ class Filme {
         })
     }
 
+    /**Métodos para visualizar todos os dados do banco de dados, utilizando QueryParams para definir o valor a ser passado na função para definir os campos que devem ser buscados */
     visualizarFilmes(req, res) {
         const campos = req.query.campos
 
@@ -36,6 +39,7 @@ class Filme {
         })
     }
 
+    /**Método para visualizar apenas um dado de acordo com o parâmetro obrigatório especificado na URL */
     visualizarUmFilme(req, res) {
         const nome = req.params.nome
 
@@ -44,6 +48,39 @@ class Filme {
                 res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
             } else {
                 res.status(200).send({ message: `Filme ${nome} foi recuperado com sucesso`, filme: data })
+            }
+        })
+    }
+
+    atualizarUmFilme(req, res) {
+        const nomeDoFilmeParaSerAtualizado = req.params.nome
+        const novoNomeDoFilme = req.body.nome
+
+        filmeschema.updateOne({ nome: nomeDoFilmeParaSerAtualizado }, { $set: req.body }, (err, data) => {
+            if (err) {
+                res.status(500).send({ message: "Houve um erro ao processar a sua atualização", error: err })
+            } else {
+                if (data.n > 0) {
+                    filmeschema.findOne({ nome: novoNomeDoFilme }, (error, result) => {
+                        if (err) {
+                            res.status(500).send({ message: "Houve um erro ao processar a sua busca no filme atualizado", error: error })
+                        } else {
+                            res.status(200).send({ message: `Filme ${nomeDoFilmeParaSerAtualizado} teve seu nome atualizado para ${novoNomeDoFilme}`, filme: result })
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    apagarUmFilme(req, res) {
+        const nomeDoFilmeParaSerApagado = req.params.nome
+
+        filmeschema.deleteOne({ nome: nomeDoFilmeParaSerApagado }, (err) => {
+            if (err) {
+                res.status(500).send({ message: "Houve um erro ao apagar um filme", error: err })
+            } else {
+                res.status(200).send({ message: `O filme ${nomeDoFilmeParaSerApagado} foi apagado com sucesso` })
             }
         })
     }
