@@ -29,3 +29,8 @@ for (let i = 0; i < 10; i++) {
         console.log(`${i} é maior do que 5`)
     }
 }
+
+
+let frutas = ['Banana', 'Maçã', 'Laranja', 'Abacaxi']
+
+console.log(frutas.length)
