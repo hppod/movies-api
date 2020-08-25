@@ -11,10 +11,6 @@ const FilmeSchema = new Schema({
         required: true,
         trim: true
     },
-    ano: {
-        type: Number,
-        required: false
-    },
     classificacaoIndicativa: {
         type: String,
         required: false
@@ -27,6 +23,11 @@ const FilmeSchema = new Schema({
         type: Number
     },
     imagem: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    sinopse: {
         type: String,
         required: true,
         trim: true
