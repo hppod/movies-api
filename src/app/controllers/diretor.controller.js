@@ -18,7 +18,7 @@ class Diretor {
             })
     }
 
-    buscarOsFilmesDeUmDiretorPeloNomeDele(req, res) {
+    buscarUmDiretorPeloNome(req, res) {
         const { nomeDiretor } = req.params
 
         if (nomeDiretor == undefined || nomeDiretor == 'null') {
@@ -33,8 +33,8 @@ class Diretor {
                 } else {
                     if (data.length <= 0) {
                         res.status(200).send({ message: `O diretor ${nomeDiretor} não existe no banco de dados` })
-                    } else if (data['filmes'].length <= 0) {
-                        res.status(200).send({ message: `O diretor ${nomeDiretor} não possui nenhum filme cadastrado` })
+                    } else if (data['filmes'] == null) {
+                        res.status(200).send({ message: `O diretor ${nomeDiretor} não possui filmes no banco de dados` })
                     } else {
                         res.status(200).send({ message: `O diretor ${nomeDiretor} possui filmes cadastrados`, data: data })
                     }
