@@ -15,12 +15,11 @@ const FilmeSchema = new Schema({
         type: String,
         required: false
     },
-    estudio: {
-        type: String,
-        trim: true
+    dataLancamento: {
+        type: Date
     },
     duracao: {
-        type: Number
+        type: String
     },
     imagem: {
         type: String,
