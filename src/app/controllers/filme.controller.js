@@ -1,4 +1,5 @@
 const filme = require('../models/filme.model')
+const diretor = require('./../models/diretor.model')
 
 class Filme {
 
@@ -29,13 +30,13 @@ class Filme {
             res.status(400).send({ message: "O nome do filme deve ser obrigatoriamente preenchido" })
         }
 
-        filme.find({ nome: nomeFilme })
+        filme.findOne({ nome: nomeFilme })
             .populate('diretor', { nome: 1, imagem: 1 })
             .exec((err, data) => {
                 if (err) {
                     res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
                 } else {
-                    if (data.length <= 0) {
+                    if (data == null) {
                         res.status(200).send({ message: `Filme não encontrado na base de dados` })
                     } else {
                         res.status(200).send({ message: `Filme ${nomeFilme} foi recuperado com sucesso`, data: data })
@@ -46,13 +47,27 @@ class Filme {
 
     /**Método para inserir um dado no banco de dados */
     criarFilme(req, res) {
-        const body = req.body
+        const reqBody = req.body
+        const idDiretor = reqBody['diretor']
 
-        filme.create(body, (err, data) => {
+        filme.create(reqBody, (err, filme) => {
             if (err) {
                 res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
             } else {
-                res.status(201).send({ message: "Filme criado com sucesso no banco de dados", filme: data })
+                diretor.findById(idDiretor, (err, diretor) => {
+                    if (err) {
+                        res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
+                    } else {
+                        diretor.filmes.push(filme)
+                        diretor.save({}, (err) => {
+                            if (err) {
+                                res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
+                            } else {
+                                res.status(201).send({ message: "Filme criado com sucesso", data: filme })
+                            }
+                        })
+                    }
+                })
             }
         })
     }
