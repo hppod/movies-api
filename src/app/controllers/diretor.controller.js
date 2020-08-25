@@ -25,13 +25,13 @@ class Diretor {
             res.status(400).send({ message: "O nome do diretor deve ser obrigatoriamente preenchido" })
         }
 
-        diretor.find({ nome: nomeDiretor })
+        diretor.findOne({ nome: nomeDiretor })
             .populate('filmes', { nome: 1, imagem: 1 })
             .exec((err, data) => {
                 if (err) {
                     res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
                 } else {
-                    if (data.length <= 0) {
+                    if (data.length == null) {
                         res.status(200).send({ message: `O diretor ${nomeDiretor} não existe no banco de dados` })
                     } else {
                         res.status(200).send({ message: `O diretor ${nomeDiretor} foi recuperado com sucesso`, data: data })
