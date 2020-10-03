@@ -3,7 +3,7 @@ const diretor = require('./../models/diretor.model')
 class Diretor {
 
     buscarTodosOsDiretores(req, res) {
-        diretor.find({}, { filmes: 0 })
+        diretor.find({})
             .sort({ nome: 1 })
             .exec((err, data) => {
                 if (err) {
@@ -25,7 +25,7 @@ class Diretor {
             res.status(400).send({ message: "O nome do diretor deve ser obrigatoriamente preenchido" })
         }
 
-        diretor.find({ nome: nomeDiretor })
+        diretor.findOne({ nome: nomeDiretor })
             .populate('filmes', { nome: 1, imagem: 1 })
             .exec((err, data) => {
                 if (err) {
