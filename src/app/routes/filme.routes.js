@@ -6,5 +6,6 @@ const Filme = require('../controllers/filme.controller')
 route.get('/listarTodos', Filme.buscarTodosOsFilmes)
 route.get('/listarUm/:nomeFilme', Filme.buscarUmFilmePeloNome)
 route.post('/criar', Filme.criarFilme)
+route.get('/validarNomeFilme', Filme.validarNomeFilme)
 
 module.exports = route

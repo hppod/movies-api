@@ -33,10 +33,8 @@ class Diretor {
                 } else {
                     if (data.length <= 0) {
                         res.status(200).send({ message: `O diretor ${nomeDiretor} não existe no banco de dados` })
-                    } else if (data['filmes'] == null) {
-                        res.status(200).send({ message: `O diretor ${nomeDiretor} não possui filmes no banco de dados` })
                     } else {
-                        res.status(200).send({ message: `O diretor ${nomeDiretor} possui filmes cadastrados`, data: data })
+                        res.status(200).send({ message: `O diretor ${nomeDiretor} foi recuperado com sucesso`, data: data })
                     }
                 }
             })
@@ -50,6 +48,22 @@ class Diretor {
                 res.status(500).send({ message: "Houve um erro ao processar a sua requisição", error: err })
             } else {
                 res.status(200).send({ message: "Diretor criado com sucesso", data: data })
+            }
+        })
+    }
+
+    validarNomeDiretor(req, res) {
+        const nome = req.query.nome.replace(/%20/g, " ")
+
+        diretor.find({ nome: { '$regex': `^${nome}$`, '$options': 'i' } }, (err, result) => {
+            if (err) {
+                res.status(500).send({ message: "Houve um erro ao processar a sua requisição" })
+            } else {
+                if (result.length > 0) {
+                    res.status(200).send({ message: "Já existe um diretor cadastrado com esse nome", data: result.length })
+                } else {
+                    res.status(200).send({ message: "Diretor disponível", data: result.length })
+                }
             }
         })
     }
